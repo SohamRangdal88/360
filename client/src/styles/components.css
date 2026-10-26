@@ -1,0 +1,370 @@
+/* ==========================================================================
+   components.css — cards, modal, toast, review, print
+   ========================================================================== */
+
+/* -------------------------------------------------------- section blocks */
+
+.section-block {
+  margin-bottom: var(--sp-5);
+}
+
+.section-title {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: var(--brand);
+  margin-bottom: var(--sp-5);
+  padding-bottom: var(--sp-3);
+  border-bottom: 2px solid var(--brand-tint);
+}
+
+/* --------------------------------------------------------- record cards */
+
+/* --------------------------------------------------------- record cards */
+
+.record-card {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--sp-3);
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sm);
+  background: var(--surface);
+  opacity: 0.85;
+}
+
+.record-card:hover {
+  box-shadow: var(--shadow);
+  border-color: var(--line-2);
+  transform: translateY(-1px);
+  opacity: 1;
+}
+
+.record-card.is-open {
+  border-color: var(--brand);
+  box-shadow: 0 4px 16px rgba(18, 69, 95, 0.12);
+}
+
+.record-header {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--surface-2);
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.record-header:hover {
+  background: var(--brand-tint);
+}
+
+.record-header:active {
+  transform: scale(0.99);
+}
+
+.record-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--brand);
+  color: #fff;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.record-header:hover .record-index {
+  transform: scale(1.1);
+}
+
+.record-label {
+  flex: 1;
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.record-chevron {
+  color: var(--ink-3);
+  font-size: 12px;
+  flex-shrink: 0;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.record-delete-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--ink-3);
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.record-delete-btn:hover {
+  background: rgba(220, 38, 38, 0.1);
+  border-color: rgba(220, 38, 38, 0.3);
+  color: #dc2626;
+  transform: scale(1.15);
+}
+
+.record-delete-btn:active {
+  transform: scale(0.95);
+}
+
+.record-card.is-open .record-chevron {
+  transform: rotate(180deg);
+}
+
+.record-body {
+  padding: var(--sp-4) var(--sp-4) var(--sp-3);
+  animation: bodyExpand 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes bodyExpand {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.record-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: var(--sp-3);
+  margin-top: var(--sp-3);
+  border-top: 1px solid var(--line);
+}
+
+.is-danger-text {
+  color: var(--danger) !important;
+}
+
+/* -------------------------------------------------------- confirm modal */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 33, 43, 0.55);
+  backdrop-filter: blur(3px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  padding: var(--sp-6);
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 40px -10px rgba(18, 69, 95, 0.3);
+  padding: var(--sp-6);
+  max-width: 460px;
+  width: 100%;
+  animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--line-2);
+}
+
+.modal-title {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  margin-bottom: var(--sp-3);
+}
+
+.modal-message {
+  font-size: var(--fs-base);
+  color: var(--ink-2);
+  line-height: 1.6;
+  margin-bottom: var(--sp-5);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sp-3);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalPop {
+  from { transform: scale(0.92) translateY(10px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* ----------------------------------------------------------------- toast */
+
+.toast {
+  position: fixed;
+  bottom: var(--sp-6);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: var(--sp-3) var(--sp-5);
+  border-radius: var(--radius-lg);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  z-index: 600;
+  animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.toast-ok {
+  background: var(--ok);
+  color: #fff;
+}
+
+.toast-error {
+  background: var(--danger);
+  color: #fff;
+}
+
+@keyframes toastIn {
+  from { transform: translateX(-50%) translateY(30px) scale(0.9); opacity: 0; }
+  to { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
+}
+
+/* ---------------------------------------------------------- review panel */
+
+.review-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  margin-bottom: var(--sp-5);
+}
+
+.review-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.review-row:hover {
+  background: var(--brand-tint);
+  transform: translateX(4px);
+}
+
+.review-row:active {
+  transform: translateX(2px) scale(0.99);
+}
+
+.review-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--line);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  color: var(--ink-3);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.review-row:hover .review-num {
+  background: var(--brand);
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.review-name {
+  flex: 1;
+  font-size: var(--fs-base);
+  font-weight: 500;
+}
+
+.review-score {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--ink-3);
+  min-width: 36px;
+  text-align: right;
+}
+
+.review-score.is-done {
+  color: var(--ok);
+}
+
+.review-score.is-partial {
+  color: var(--warn);
+}
+
+.review-summary {
+  margin-bottom: var(--sp-5);
+}
+
+/* ------------------------------------------------------- submitted panel */
+
+.submitted-panel {
+  text-align: center;
+  padding: var(--sp-12) var(--sp-6);
+}
+
+.submitted-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--ok-tint);
+  color: var(--ok);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: var(--sp-4);
+}
+
+.submitted-actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  margin-top: var(--sp-5);
+}
+
+/* --------------------------------------------------------------- print */
+
+@media print {
+  .app-header,
+  .tab-rail,
+  .actionbar,
+  .dl-wrap,
+  .toast,
+  .modal-backdrop {
+    display: none !important;
+  }
+
+  .page {
+    padding: 0;
+  }
+
+  .panel {
+    box-shadow: none;
+    border: none;
+  }
+}
